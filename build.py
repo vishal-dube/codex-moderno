@@ -19,7 +19,7 @@ from render import OUT, render
 ROOT = Path(__file__).resolve().parent
 SITE = ROOT / "site"
 WEB = ROOT / "web"
-SITE_URL = ""  # e.g. "https://codicemoderno.com" once hosted; enables link previews on X
+SITE_URL = "https://vishal-dube.github.io/codex-moderno"  # enables link previews on X
 
 FONTS = ("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500"
          "&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap")
