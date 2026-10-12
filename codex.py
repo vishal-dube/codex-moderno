@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import math
 import random
+from contextlib import contextmanager
 from xml.sax.saxutils import escape
 
 W, H = 1600, 1200
@@ -194,6 +195,30 @@ class Page:
         # Every mark in the order it was made, so the page can also be
         # replayed stroke by stroke (see svg(progress=...)).
         self.marks: list[dict] = []
+        self._xf: tuple[float, float, float] | None = None  # (scale, dx, dy) for transformed()
+
+    @contextmanager
+    def transformed(self, scale=1.0, dx=0.0, dy=0.0):
+        """Draw a group at another size and place: everything inside is scaled about
+        the origin and then shifted. Tone functions still see the original coordinates."""
+        prev = self._xf
+        self._xf = (scale, dx, dy)
+        try:
+            yield
+        finally:
+            self._xf = prev
+
+    def _fwd(self, pts):
+        if not self._xf:
+            return pts
+        k, dx, dy = self._xf
+        return [(x * k + dx, y * k + dy) for x, y in pts]
+
+    def _inv(self, q):
+        if not self._xf:
+            return q
+        k, dx, dy = self._xf
+        return ((q[0] - dx) / k, (q[1] - dy) / k)
 
     def _mark(self, layer, kind, length, **data):
         self.marks.append({"layer": layer, "kind": kind, "length": length, "seq": len(self.marks), **data})
@@ -211,6 +236,7 @@ class Page:
 
     def contour(self, pts, closed=True, w=2.2, passes=2, amp=1.0, color=INK,
                 opacity=0.92, layer="ink", dash=None, overshoot=0.0, ghosts=0):
+        pts = self._fwd(pts)
         for _ in range(ghosts):
             dense = self._drift(_subdivide(pts, closed, 8), amp * 3.2)
             sh = (self.rng.uniform(-3, 3), self.rng.uniform(-3, 3))
@@ -264,6 +290,10 @@ class Page:
         """
         if polys and isinstance(polys[0][0], (int, float)):
             polys = [polys]
+        polys = [self._fwd(poly) for poly in polys]
+        if tone and self._xf:
+            local_tone, inv = tone, self._inv
+            tone = lambda q: local_tone(inv(q))  # noqa: E731
         a = math.radians(angle)
         ca, sa = math.cos(a), math.sin(a)
 
@@ -339,6 +369,7 @@ class Page:
     # writing (mirrored, as Leonardo wrote)
 
     def _mirror_text(self, s, x_right, y, size, opacity, rot=0.0, title=False):
+        (x_right, y), = self._fwd([(x_right, y)])
         self._mark("text", "text", len(s) * size * 0.5, s=s, x=x_right, y=y, size=size,
                    opacity=opacity, rot=rot, title=title)
 

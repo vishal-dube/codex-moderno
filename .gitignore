@@ -2,3 +2,6 @@
 __pycache__/
 out/
 .DS_Store
+site/
+audio/*
+!audio/credits.json

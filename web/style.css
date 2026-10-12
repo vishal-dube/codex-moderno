@@ -1,0 +1,277 @@
+:root {
+  --bg: #15100c;
+  --surface: #1f1813;
+  --line: #3a2d22;
+  --text: #ece2cc;
+  --muted: #a8977c;
+  --chalk: #d0764b;
+  --display: "Cormorant Garamond", "Iowan Old Style", "Palatino", Georgia, serif;
+  --body: "EB Garamond", "Iowan Old Style", "Palatino", Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 19px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+img, video { display: block; max-width: 100%; height: auto; }
+
+/* ---------- home ---------- */
+
+.masthead {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 96px 24px 56px;
+  text-align: center;
+}
+
+.eyebrow, .num, .count {
+  font-family: var(--body);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0;
+}
+
+.masthead h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(56px, 11vw, 112px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin: 18px 0 28px;
+}
+
+.lede {
+  font-size: 22px;
+  line-height: 1.55;
+  margin: 0 auto 28px;
+  max-width: 640px;
+}
+
+.count { color: var(--chalk); }
+
+.folios {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+  max-width: 1240px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 48px 32px;
+}
+
+.card a { text-decoration: none; display: block; }
+
+.card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 2px;
+}
+
+.card img {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 40px -18px rgba(0, 0, 0, 0.8);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card a:hover img, .card a:focus-visible img {
+  transform: translateY(-4px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 28px 50px -20px rgba(0, 0, 0, 0.9);
+}
+
+.card a:focus-visible { outline: none; }
+.card a:focus-visible h2 { text-decoration: underline; text-decoration-color: var(--chalk); }
+
+.cap { padding: 16px 2px 0; }
+
+.cap h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.15;
+  margin: 6px 0 2px;
+}
+
+.cap .it, .cap .maker {
+  font-style: italic;
+  color: var(--muted);
+  margin: 0;
+  font-size: 17px;
+}
+
+.forthcoming {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+  text-align: center;
+}
+
+.forthcoming h2 {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 34px;
+  margin: 0 0 4px;
+}
+
+.forthcoming > p { margin: 0 0 28px; color: var(--muted); }
+
+.forthcoming ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0 32px;
+  text-align: left;
+}
+
+.forthcoming li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 19px;
+}
+
+.forthcoming .num { display: inline-block; min-width: 3.4em; font-size: 12px; }
+.forthcoming .year { float: right; color: var(--muted); font-size: 16px; }
+
+/* ---------- folio ---------- */
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 24px;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.top a { text-decoration: none; color: var(--text); }
+.top a:hover { color: var(--chalk); }
+
+.folio { max-width: 1240px; margin: 0 auto; padding: 0 24px 80px; }
+
+.folio-head { text-align: center; padding: 40px 0 36px; }
+
+.folio-head h1 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(44px, 8vw, 84px);
+  line-height: 1.05;
+  margin: 12px 0 18px;
+}
+
+.title-it { margin: 0; display: flex; flex-direction: column; gap: 4px; align-items: center; }
+
+.title-it .mirror {
+  display: inline-block;
+  transform: scaleX(-1);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 26px;
+  color: var(--text);
+}
+
+.title-it .en { font-style: italic; color: var(--muted); font-size: 18px; }
+
+.plate { margin: 0; }
+
+.plate img, .plate video {
+  width: 100%;
+  border-radius: 2px;
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.9);
+  background: #e8d6ae;
+}
+
+.plate figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.plate figcaption .hint { margin: 0; font-style: italic; }
+.plate figcaption a { color: var(--chalk); text-underline-offset: 3px; margin-left: auto; }
+
+.text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  max-width: 1040px;
+  margin: 72px auto 0;
+}
+
+.text h2 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 30px;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.about p { margin: 0; font-size: 20px; }
+.about .music { margin-top: 20px; font-size: 16px; color: var(--muted); }
+
+.notes ol { list-style: none; margin: 0; padding: 0; }
+.notes li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.notes li:last-child { border-bottom: 0; }
+.notes .it { margin: 0; font-style: italic; }
+.notes .en { margin: 2px 0 0; color: var(--muted); font-size: 17px; }
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 1040px;
+  margin: 72px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 18px;
+}
+
+.pager a { text-decoration: none; }
+.pager a:hover { color: var(--chalk); }
+
+.foot {
+  border-top: 1px solid var(--line);
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 32px 24px 56px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.foot p { max-width: 620px; margin: 0 auto; }
+
+@media (max-width: 760px) {
+  body { font-size: 18px; }
+  .masthead { padding: 64px 16px 40px; }
+  .lede { font-size: 19px; }
+  .folios { padding: 0 16px 64px; gap: 40px; grid-template-columns: 1fr; }
+  .top { padding: 16px; font-size: 13px; }
+  .folio { padding: 0 16px 56px; }
+  .folio-head { padding: 24px 0 24px; }
+  .text { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
+  .pager { flex-direction: column; margin-top: 48px; }
+  .pager a[rel="next"] { text-align: right; }
+}
